@@ -34,10 +34,9 @@ class DataSetFactory:
             ]) 
         train_transform = transforms.Compose([            
             transforms.Resize(shape),    
-            transforms.RandomGrayscale(0.1),
-            transforms.ColorJitter(brightness=0.5, contrast=0.5, hue=0.5),
-            #transforms.RandomRotation(degrees=(20)),
-            transforms.RandomHorizontalFlip(p=0.5),
+            # transforms.RandomGrayscale(0.1),
+            # transforms.ColorJitter(brightness=0.5, contrast=0.5, hue=0.5),
+            # transforms.RandomHorizontalFlip(p=0.5),
             transforms.ToTensor(),
             ]) 
 
@@ -102,8 +101,14 @@ class DataSetFactory:
                 data = csv.reader(csvin)
                 next(data)
                 for row in data:
-                    age=int(float(row[0])+0.5)
-                    if age < 0 or age>100 or name=='imdb_wiki' and (age < 6 or age>90):
+                    # print(row)
+                    age = int(float(row[0]) + 0.5)
+                    if (
+                        age < 0
+                        or age > 100
+                        or name == "imdb_wiki"
+                        and (age < 6 or age > 90)
+                    ):
                         continue
                     age = max(age, self.config.min_age)
                     age = min(age, self.config.max_age)

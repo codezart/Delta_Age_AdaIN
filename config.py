@@ -12,7 +12,7 @@ class Config:
         # train
         self.batch_size = 64
         self.lr = 1e-3
-        self.epochs = 200
+        self.epochs = 120
         self.use_multiple_gpu=False
         self.device_ids=[0,1] if self.use_multiple_gpu else [0]
         self.pre_epoch = 0
@@ -33,6 +33,5 @@ class Config:
         self.da_type = 'binary' #['binary','decimal', 'image_template']
         self.image_template_path=''
 
-        self.pretrained_fn=''
-        self.pretrained_ex_params=[]
-       
+        self.pretrained_fn = "models/megaage_asian_resnet18_100_binary/resnet18_epoch_200_ac_93.75-87.50.pth" #"models/utkface_resnet18_100_binary/utkface_resnet18_epoch_120_ac_73.44-62.50.pth" #
+        self.pretrained_ex_params = []

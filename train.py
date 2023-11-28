@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 import math
+import random
 from tensorboardX import SummaryWriter
 import warnings
 warnings.filterwarnings('ignore')
@@ -275,12 +276,23 @@ class DAATrainer(object):
 
 
 if __name__ == "__main__":
+    seed = 42
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
+    
+    # set seed
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
     from config import Config
     cfg = Config()
     trainer = DAATrainer(cfg)
-    if cfg.mode=='test':
-        trainer.test() 
+    if cfg.mode == "test":
+        print("\n\n\n\n test \n\n\n\n\n")
+        trainer.test()
     else:
         trainer.train()
